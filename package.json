@@ -1,0 +1,30 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index",
+    "seed": "node utils/seed",
+    "heroku-postbuild": "node utils/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amirlasalle/social-network-API.git"
+  },
+  "keywords": [
+    "mongodb"
+  ],
+  "author": "Amir Mohamed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Amirlasalle/social-network-API/issues"
+  },
+  "homepage": "https://github.com/Amirlasalle/social-network-API#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.4.0"
+  }
+}
