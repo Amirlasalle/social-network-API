@@ -1,4 +1,6 @@
 const { Schema, Types } = require('mongoose');
+const moment = require('moment');
+const formatMyDate = (date) => moment(date).format('MMMM Do YYYY, h:mm:ss a');
 
 const reactionsSchema = new Schema(
   {
@@ -6,21 +8,19 @@ const reactionsSchema = new Schema(
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
-    reactionName: {
+    reactionBody: {
       type: String,
       required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: 'reaction',
+      maxlength: 280,
     },
-    likes: {
-      type: Number,
+    username: {
+      type: string,
       required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default:Date.now,
+      get: timeStamp=>formatMyDate(timeStamp),
     },
   },
   {
@@ -30,5 +30,6 @@ const reactionsSchema = new Schema(
     id: false,
   }
 );
+
 
 module.exports = reactionsSchema; // reactions
