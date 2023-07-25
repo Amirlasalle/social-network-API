@@ -5,25 +5,27 @@ const userSchema = new Schema(
   {
     userName: {
       type: String,
+      unique: true,
       required: true,
+      trim: true,
     },
-    inPerson: {
-      type: Boolean,
-      default: true,
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    match:[/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,"Enter valid email"]
+      
     },
-    startDate: {
-      type: Date,
-      default: Date.now(),
-    },
-    endDate: {
-      type: Date,
-      // Sets a default value of 12 weeks from now
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
-    },
-    students: [
+    thoughts: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Student',
+        ref: 'Thought',
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
       },
     ],
   },
@@ -35,7 +37,10 @@ const userSchema = new Schema(
   }
 );
 
-const User = model('course', userSchema);
+userSchema.virtual("friendCount").get(function(){
+  return friends.length;
+})
+const User = model('User', userSchema);
 
 module.exports = User;
-// Usrs
+// Users
