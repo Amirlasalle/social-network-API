@@ -6,7 +6,7 @@ const formatMyDate = (date) => moment(date).format('MMMM Do YYYY, h:mm:ss a');
 
 
 // Schema to create thought model
-const thoughtsSchema = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -33,10 +33,10 @@ const thoughtsSchema = new Schema(
 );
 
 
-userSchema.virtual("reactionCount").get(function(){
-  return reactions.length;
+thoughtSchema.virtual("reactionCount").get(function(){
+  return this.reactions.length;
 })
-const Thoughts = model('thoughts', thoughtsSchema);
+const Thoughts = model('thoughts', thoughtSchema);
 
 module.exports = Thoughts;
 // Thoughts
